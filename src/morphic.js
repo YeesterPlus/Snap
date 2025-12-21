@@ -3754,9 +3754,14 @@ Morph.prototype.drawOn = function (ctx, rect) {
         try{
             this.render(ctx);
         }catch(error){
-            console.log(error);
+            console.error(error);
             ctx.fillStyle='#f00';
             ctx.fillRect(0,0,clipped.width(),clipped.height());
+		    ctx.fillStyle='#fff';
+		    ctx.strokeStyle='#000';
+		    var errorText = 'RenderError!\n' + error.toString() + '\nplease report the bug';
+		    ctx.strokeText(errorText,0,0);
+		    ctx.fillText(errorText,0,0);
         }
         if (MorphicPreferences.showHoles) { // debug hole rendering
             ctx.translate(-pos.x, -pos.y);
